@@ -52,8 +52,8 @@ const sizeName = (l: { lengthMm: number; widthMm: number }, shape: Shape) =>
 const KEY = 'vorratsetiketten:v1';
 interface Saved { frame: FrameId; font: FontId; sizeKey: string; density: number; items: string[]; }
 const DEFAULTS: Saved = {
-	frame: 'zierrahmen',
-	font: 'verspielt',
+	frame: 'wiese',
+	font: 'schlicht',
 	sizeKey: '50x30-rect',
 	density: 4,
 	items: ['Mehl', 'Zucker', 'Salz', 'Reis', 'Nudeln', 'Vermi\nCelli', 'Haferflocken', 'Kaffee', 'Linsen', 'Müsli']
@@ -61,7 +61,11 @@ const DEFAULTS: Saved = {
 function load(): Saved {
 	try {
 		const raw = localStorage.getItem(KEY);
-		if (raw) return { ...DEFAULTS, ...JSON.parse(raw) };
+		if (raw) {
+			const s = { ...DEFAULTS, ...JSON.parse(raw) } as Saved;
+			if (!FRAMES.some((f) => f.id === s.frame)) s.frame = DEFAULTS.frame; // alte Rahmen gibt es nicht mehr
+			return s;
+		}
 	} catch { /* ohne Speicher weiter */ }
 	return { ...DEFAULTS, items: [...DEFAULTS.items] };
 }

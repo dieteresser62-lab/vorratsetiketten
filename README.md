@@ -7,6 +7,8 @@ Kleine Web-App, um Etiketten für Vorratsdosen auf dem **Katasymbol T50M Pro** (
 - **Android / PC:** in Chrome öffnen, „Drucker verbinden“ antippen.
 - **iPhone:** die kostenlose App **Bluefy** aus dem App Store laden und die Adresse darin öffnen (Safari kann kein Bluetooth).
 
+![Die sechs Rahmen](rahmen.png)
+
 Ein festes Grundlayout (Rahmen, Schrift, Etikettengröße), nur der Inhalt in der Mitte ändert sich. Zweizeilige Texte werden Zeile für Zeile zentriert.
 
 ## Aufbau
