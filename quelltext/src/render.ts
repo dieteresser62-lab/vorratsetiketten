@@ -109,6 +109,8 @@ export function renderCanvas(d: LabelDesign, canvas: HTMLCanvasElement): void {
 	ctx.textAlign = 'center';
 	ctx.textBaseline = 'middle';
 	const lay = bestLayout(ctx, text, font.family, font.weight, boxW, Math.min(mainH, boxH));
+	// Kurze Wörter nicht aufblähen: höchstens ca. ein Viertel der Etikettenhöhe (wie handgemachte Etiketten)
+	lay.size = Math.min(lay.size, Math.min(W, H) * 0.27 * font.scale);
 	ctx.font = `${font.weight} ${lay.size}px ${font.family}`;
 	const lh = lay.size * lay.lineGap;
 	const blockH = lh * lay.lines.length + (extra ? extraH * 1.15 : 0);
