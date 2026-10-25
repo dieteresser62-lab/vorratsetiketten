@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#8f6a22">
+<title>Vorratsetiketten</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Dancing+Script:wght@700&family=Figtree:wght@400;500;600;700&family=Kurale&family=Nunito:wght@600;800&family=Playfair+Display:wght@700&family=Young+Serif&display=swap">
+<link rel="stylesheet" href="/src/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <h1>Vorratsetiketten</h1>
+    <p class="sub">für den Katasymbol T50M Pro</p>
+  </div>
+  <div class="conn">
+    <span id="status" class="pill" data-state="off">Nicht verbunden</span>
+    <button id="connect" class="btn ghost" type="button">Drucker verbinden</button>
+  </div>
+</header>
+
+<main class="wrap">
+  <p id="error" class="note error" role="alert" hidden></p>
+  <p id="nobt" class="note" hidden>Dieser Browser kann nicht mit Bluetooth-Geräten sprechen. Bitte die Seite in <strong>Chrome</strong> (Android oder PC) öffnen.</p>
+
+  <section class="stage" aria-label="Vorschau">
+    <div class="label-wrap">
+      <canvas id="preview" class="label" aria-label="Etikettenvorschau"></canvas>
+    </div>
+    <p id="sizeinfo" class="caption">50 × 30 mm</p>
+  </section>
+
+  <section class="panel">
+    <label class="field">
+      <span class="field-name">Inhalt der Dose</span>
+      <textarea id="text" rows="2" maxlength="60" spellcheck="true" placeholder="z. B. Mehl">Vermi&#10;Celli</textarea>
+      <span class="hint">Enter = neue Zeile. Jede Zeile wird mittig gesetzt.</span>
+    </label>
+    <div class="field">
+      <label class="field-name" for="extra">Zusatzzeile <span class="opt">(optional)</span></label>
+      <div class="row">
+        <input id="extra" type="text" maxlength="40" placeholder="z. B. Bio · 1 kg">
+        <button id="date" class="btn small" type="button">Datum</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-head">
+      <h2>Vorräte</h2>
+      <div class="row tight">
+        <button id="save" class="btn small" type="button">+ Merken</button>
+        <button id="editlist" class="btn small ghost" type="button" aria-pressed="false">Bearbeiten</button>
+      </div>
+    </div>
+    <div id="chips" class="chips"></div>
+    <label class="check">
+      <input id="batch" type="checkbox">
+      <span>Mehrere auf einmal drucken (antippen zum Auswählen)</span>
+    </label>
+  </section>
+
+  <details class="panel" id="layout">
+    <summary><h2>Grundlayout</h2><span class="summary-hint">Rahmen, Schrift, Etikett</span></summary>
+    <div class="field">
+      <span class="field-name">Rahmen</span>
+      <div id="frames" class="choices"></div>
+    </div>
+    <div class="field">
+      <span class="field-name">Schrift</span>
+      <div id="fonts" class="seg"></div>
+    </div>
+    <div class="field">
+      <label class="field-name" for="size">Etikettengröße</label>
+      <select id="size"></select>
+      <span id="sizehint" class="hint">Wird nach dem Verbinden automatisch vom Drucker übernommen.</span>
+    </div>
+    <div class="field">
+      <label class="field-name" for="density">Druckstärke <output id="densityout">4</output></label>
+      <input id="density" type="range" min="1" max="9" step="1" value="4">
+    </div>
+  </details>
+
+  <p class="foot">Druckprotokoll aus dem Open-Source-Projekt <em>supvan-katasymbol-printer-web-ui</em> (MIT-Lizenz).</p>
+</main>
+
+<div class="printbar">
+  <div class="printbar-in">
+    <div class="copies" role="group" aria-label="Anzahl">
+      <button id="minus" class="step" type="button" aria-label="weniger">−</button>
+      <output id="copies">1</output>
+      <button id="plus" class="step" type="button" aria-label="mehr">+</button>
+    </div>
+    <button id="print" class="btn print" type="button">Drucken</button>
+  </div>
+  <p id="progress" class="progress" aria-live="polite"></p>
+</div>
+<script type="module" src="/src/main.ts"></script>
+</body>
+</html>

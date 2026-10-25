@@ -1,0 +1,4 @@
+{ "compilerOptions": { "target": "es2022", "module": "esnext", "moduleResolution": "bundler", "strict": true, "noEmit": true,
+  "resolveJsonModule": true, "allowJs": true, "skipLibCheck": true, "lib": ["es2023","dom","dom.iterable"],
+  "types": ["web-bluetooth","w3c-web-hid","w3c-web-serial","vite/client"] },
+  "include": ["src"] }
